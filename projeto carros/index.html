@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes Carro e Ferrari</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js">
+  
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            max-width: 600px;
+            margin: 10px auto;
+            overflow: auto; /* Para permitir rolagem se o texto for muito longo */
+            white-space: pre-wrap; /* Para quebras de linha automáticas */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Classes Carro e Ferrari</h1>
+
+<pre id="output"></pre>
+
+<script>
+class Riqueza {
+    constructor(rico = true) {
+        this._rico = rico;
+    }
+
+    get rico() {
+        return this._rico;
+    }
+
+    set rico(value) {
+        this._rico = value;
+    }
+}
+
+class Carro {
+    static _numObj = 0;
+
+    constructor(portas = 4) {
+        this.portas = portas;
+        Carro._numObj++;
+    }
+
+    static getNumObj() {
+        return Carro._numObj;
+    }
+
+    mostrar(texto) {
+        return `Portas do ${texto} = ${this.portas}`;
+    }
+
+    veloMax() {
+        return 180;
+    }
+
+    get portas() {
+        return this._portas;
+    }
+
+    set portas(value) {
+        this._portas = value >= 0 ? value : 4;
+    }
+}
+
+class Ferrari extends Carro {
+    constructor(portas = 2, rico = true) {
+        super(portas);
+        this._rico = rico;
+    }
+
+    veloMax() {
+        return 300;
+    }
+
+    get rico() {
+        return this._rico;
+    }
+
+    set rico(value) {
+        this._rico = value;
+    }
+}
+
+// Exemplo de uso
+let output = "";
+
+output += 'Número de objetos da classe Carro: ' + Carro.getNumObj() + '\n';
+
+const carroTeste = new Carro(1);
+output += carroTeste.mostrar('carro teste') + '\n';
+
+const meuCarro = new Carro();
+output += meuCarro.mostrar('meu carro') + '\n';
+output += 'Velocidade máxima do meu carro: ' + meuCarro.veloMax() + '\n';
+
+const seuCarro = new Carro();
+seuCarro.portas = 3;
+output += seuCarro.mostrar('seu carro') + '\n';
+output += 'Portas do seu carro: ' + seuCarro.portas + '\n';
+
+const carroCoordenador = new Ferrari();
+output += carroCoordenador.mostrar('carro do coordenador') + '\n';
+output += 'Velocidade máxima de uma Ferrari: ' + carroCoordenador.veloMax() + '\n';
+output += 'Portas de uma Ferrari: ' + carroCoordenador.portas + '\n';
+
+const ferrariTeste = new Ferrari(2, false);
+output += 'O dono da Ferrari teste é rico? ' + ferrariTeste.rico + '\n';
+output += 'Número de objetos da classe Carro: ' + Carro.getNumObj() + '\n';
+
+// Exibe o resultado no HTML
+document.getElementById('output').textContent = output;
+
+</script>
+</body>
+</html>
